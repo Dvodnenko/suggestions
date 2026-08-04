@@ -8,9 +8,9 @@ from .db import songs_db, quality_matrix
 
 
 class ImplicitFeedback(Enum):
-    LIKE = 2
-    OKAY = 1
-    SKIP = 0
+    LIKE = 1
+    OKAY = 0
+    SKIP = -1
 
 
 @dataclass
