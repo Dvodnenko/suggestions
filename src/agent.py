@@ -26,7 +26,7 @@ class Agent:
     def select_track(self):
         if random.uniform(0, 1) <= self.epsilon:
             return songs_db[random.randint(0, len(songs_db)-1)] # random track
-        return songs_db[np.argmax(quality_matrix.dot(self.preferences))]
+        return self._select_greedy()
 
     def update_preference(self, track: np.ndarray, feedback: ImplicitFeedback):
         self.preferences += self.alpha*(
@@ -39,3 +39,6 @@ class Agent:
             int(input(f"Select feedback for track \"{track["title"]}\":"))
         )
         self.update_preference(track["vector_x"], feedback)
+
+    def _select_greedy(self):
+        return songs_db[np.argmax(quality_matrix.dot(self.preferences))]
