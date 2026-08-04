@@ -27,3 +27,15 @@ class Agent:
         if random.uniform(0, 1) <= self.epsilon:
             return songs_db[random.randint(0, len(songs_db)-1)] # random track
         return songs_db[np.argmax(quality_matrix.dot(self.preferences))]
+
+    def update_preference(self, track: np.ndarray, feedback: ImplicitFeedback):
+        self.preferences += self.alpha*(
+            feedback.value - self.preferences.dot(track))*track
+        self.preferences /= self.pref_length # L2 normalization
+
+    def step(self):
+        track = self.select_track()
+        feedback = ImplicitFeedback(
+            int(input(f"Select feedback for track \"{track["title"]}\":"))
+        )
+        self.update_preference(track["vector_x"], feedback)
