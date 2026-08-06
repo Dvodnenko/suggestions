@@ -38,7 +38,7 @@ class Agent:
         feedback = ImplicitFeedback(
             int(input(f"Select feedback for track \"{track["title"]}\":"))
         )
-        self.update_preference(track["vector_x"], feedback)
+        self.update_preference(track["vector"], feedback)
 
     def _select_greedy(self):
         return songs_db[np.argmax(quality_matrix.dot(self.preferences))]
