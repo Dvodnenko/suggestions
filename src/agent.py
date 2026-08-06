@@ -4,7 +4,7 @@ from enum import Enum
 
 import numpy as np
 
-from .db import songs_db, quality_matrix
+from .sample_db import songs_db, quality_matrix
 
 
 class ImplicitFeedback(Enum):
