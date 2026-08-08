@@ -94,6 +94,8 @@ class Database:
             expr_parts.append(f"id not in {exclude_ids}")
         expr = " and ".join(expr_parts) if expr_parts else None
 
+        self.client.load_collection(self.collection_name)
+
         results = self.client.search(
             collection_name=self.collection_name,
             data=[query_vector],
