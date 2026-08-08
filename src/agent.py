@@ -4,8 +4,6 @@ from enum import Enum
 
 import numpy as np
 
-from .sample_db import songs_db, quality_matrix
-
 
 class ImplicitFeedback(Enum):
     LIKE = 1
@@ -25,7 +23,7 @@ class Agent:
 
     def select_track(self):
         if random.uniform(0, 1) <= self.epsilon:
-            return songs_db[random.randint(0, len(songs_db)-1)] # random track
+            return # random track
         return self._select_greedy()
 
     def update_preference(self, track: np.ndarray, feedback: ImplicitFeedback):
@@ -41,4 +39,4 @@ class Agent:
         self.update_preference(track["vector"], feedback)
 
     def _select_greedy(self):
-        return songs_db[np.argmax(quality_matrix.dot(self.preferences))]
+        return
