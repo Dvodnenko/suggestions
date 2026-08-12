@@ -17,10 +17,6 @@ class Agent:
     epsilon: float
     alpha: float
 
-    @property
-    def pref_length(self):
-        return np.sqrt((self.preferences*self.preferences).sum())
-
     def select_track(self):
         if random.uniform(0, 1) <= self.epsilon:
             return # random track
@@ -29,7 +25,7 @@ class Agent:
     def update_preference(self, track: np.ndarray, feedback: ImplicitFeedback):
         self.preferences += self.alpha*(
             feedback.value - self.preferences.dot(track))*track
-        self.preferences /= self.pref_length # L2 normalization
+        self.preferences /= np.linalg.norm(self.preferences) # L2 normalization
 
     def step(self):
         track = self.select_track()
