@@ -4,6 +4,8 @@ from enum import Enum
 
 import numpy as np
 
+from .db import Database
+
 
 class ImplicitFeedback(Enum):
     LIKE = 1
@@ -13,6 +15,7 @@ class ImplicitFeedback(Enum):
 
 @dataclass
 class Agent:
+    db: Database
     preferences: np.ndarray # vector of user's estimated preferences
     epsilon: float
     alpha: float
@@ -32,7 +35,8 @@ class Agent:
         feedback = ImplicitFeedback(
             int(input(f"Select feedback for track \"{track["title"]}\":"))
         )
-        self.update_preference(track["vector"], feedback)
+        self.update_preference(np.array(track["embedding"]), feedback)
 
     def _select_greedy(self):
-        return
+        return self.db.search(
+            self.preferences, 1)[0]
