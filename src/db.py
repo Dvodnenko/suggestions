@@ -116,5 +116,16 @@ class Database:
 
         return results[0]
 
+    def get(self, ids: list[int]):
+        self.client.load_collection(self.collection_name)
+        return self.client.get(
+            collection_name=self.collection_name,
+            ids=ids,
+            output_fields=[
+                "title", "main_artist", "genre",
+                "danceability", "energy", "valence",
+            ],
+        )
+
     def close(self) -> None:
         self.client.close()
