@@ -13,8 +13,7 @@ class Database:
             db_path: str = "./data/songs.db",
             collection_name: str = "songs",
             dimensions: int = 3,
-            metric_type: str = "IP" # vectores are L2 normalised, hence cosine = IP, 
-                                    # and IP is cheaper to compute
+            metric_type: str = "COSINE"
     ):
         self.db_path = db_path
         self.collection_name = collection_name
