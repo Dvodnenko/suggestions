@@ -108,7 +108,7 @@ class Database:
             filter=expr,
             search_params={"metric_type": self.metric_type, "params": {"ef": ef}},
             output_fields=[
-                "title", "main_artist", "genre",
+                "title", "main_artist", "genre", "embedding",
                 "danceability", "energy", "valence",
             ],
         )
@@ -121,7 +121,7 @@ class Database:
             collection_name=self.collection_name,
             ids=ids,
             output_fields=[
-                "title", "main_artist", "genre",
+                "title", "main_artist", "genre", "embedding",
                 "danceability", "energy", "valence",
             ],
         )
