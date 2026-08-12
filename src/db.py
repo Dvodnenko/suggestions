@@ -22,6 +22,12 @@ class Database:
         self.metric_type = metric_type
         self.client = MilvusClient(uri=db_path)
 
+    @property
+    def row_count(self) -> int:
+        "number of entries (songs) in the collection"
+        return self.client.get_collection_stats(
+            self.collection_name)["row_count"]
+
     def create_collection(self, drop_if_exists: bool = False):
         if self.client.has_collection(self.collection_name):
             if drop_if_exists:
