@@ -65,6 +65,10 @@ class Database:
         rows = [self._record_to_row(s) for s in songs]
         return self.client.insert(collection_name=self.collection_name, data=rows)
 
+    def upsert_songs(self, songs: list[SongRecord]) -> dict[str, Any]:
+        rows = [self._record_to_row(s) for s in songs]
+        return self.client.upsert(collection_name=self.collection_name, data=rows)
+
     @staticmethod
     def _record_to_row(s: SongRecord) -> dict[str, Any]:
         return {
