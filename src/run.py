@@ -13,7 +13,7 @@ preferences = np.zeros(3) + 1/np.sqrt(3)
 
 agent = Agent(
     db, preferences,
-    0, 0.25
+    0.25
 )
 
 while True:

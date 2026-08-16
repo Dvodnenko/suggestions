@@ -17,12 +17,9 @@ class ImplicitFeedback(Enum):
 class Agent:
     db: Database
     preferences: np.ndarray # vector of user's estimated preferences
-    epsilon: float
     alpha: float
 
     def select_track(self):
-        if random.uniform(0, 1) <= self.epsilon:
-            return # random track
         return self._select_greedy()
 
     def update_preference(self, track: np.ndarray, feedback: ImplicitFeedback):
