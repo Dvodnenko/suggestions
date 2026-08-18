@@ -1,20 +1,11 @@
 import numpy as np
 
-from .agent import Agent
-from .db import Database
-from .sr import SongRecord
-from .utils import build_embedding
+from .agent import Agent, Environment
 
 
-db = Database()
-db.create_collection()
-
-preferences = np.zeros(3) + 1/np.sqrt(3)
-
+env = Environment(10, np.random.normal(0, 1, 10))
 agent = Agent(
-    db, preferences,
-    0.25
+    env,
+    np.zeros(10) + 1,
+    np.zeros(10) + 1,
 )
-
-while True:
-    agent.step()
