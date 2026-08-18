@@ -25,3 +25,7 @@ class Agent:
     env: Environment
     alphas: np.ndarray
     betas: np.ndarray
+
+    def select_song(self):
+        thetas = np.random.beta(self.alphas, self.betas)
+        return int(np.argmax(thetas))
