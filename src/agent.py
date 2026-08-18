@@ -24,11 +24,12 @@ class Agent:
     env: Environment
     alphas: np.ndarray
     betas: np.ndarray
+    gamma: float = .9
 
     def select_song(self):
         thetas = np.random.beta(self.alphas, self.betas)
         return int(np.argmax(thetas))
 
     def update(self, song: int, reward: int):
-        self.alphas[song] += reward
-        self.betas[song] += 1 - reward
+        self.alphas[song] = self.gamma * self.alphas[song] + reward
+        self.betas[song]  = self.gamma * self.betas[song] + (1 - reward)
