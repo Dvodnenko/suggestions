@@ -6,8 +6,7 @@ import numpy as np
 
 class ImplicitFeedback(Enum):
     LIKE = 1
-    OKAY = 0
-    SKIP = -1
+    NOTLIKE = 0
 
 
 @dataclass(frozen=True)
@@ -29,3 +28,7 @@ class Agent:
     def select_song(self):
         thetas = np.random.beta(self.alphas, self.betas)
         return int(np.argmax(thetas))
+
+    def update(self, song: int, reward: int):
+        self.alphas[song] += reward
+        self.betas[song] += 1 - reward
