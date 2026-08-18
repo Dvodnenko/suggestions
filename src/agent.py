@@ -18,3 +18,10 @@ class Environment:
     def pick(self, song: int) -> float:
         value = np.random.normal(self.actual_values[song], 1)
         return value
+
+
+@dataclass
+class Agent:
+    env: Environment
+    alphas: np.ndarray
+    betas: np.ndarray
